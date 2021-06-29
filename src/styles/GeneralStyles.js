@@ -26,7 +26,6 @@ export const InputFields = styled.div`
     input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-        
     }   
     input[type=number] {
     -moz-appearance: textfield;
