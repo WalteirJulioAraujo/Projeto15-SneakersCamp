@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { Logo, InputFields, SubmitButton } from "../styles/GeneralStyles";
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Logo, InputFields, SubmitButton, RedirectLink } from "../styles/GeneralStyles";
+import axios from 'axios';
 
 export default function SignUp() {
     const [ name, setName ] = useState("");
@@ -8,10 +10,25 @@ export default function SignUp() {
     const [ confirmPassword, setConfirmPassword ] = useState("");
     const [ cep, setCep ] = useState("");
     const [ disabled, setDisabled ] = useState(false);
+    let history = useHistory();
 
     function sendForms(e) {
         e.preventDefault();
-        return alert("teste");
+        setDisabled(true);
+
+        if(password !== confirmPassword) return alert('As senhas não batem');
+        if(!name.trim()) return alert('Você deve preencher o campo nome');
+        if(password.length < 3) return alert('A senha deve ter ao menos 3 dígitos');
+    
+        const body = { name, email, password, cep }
+        console.log(body)
+        const request = axios.post('http://localhost:4000/signup',body);
+        request.then(()=>history.push('/login'));
+        request.catch(()=>{
+            setDisabled(false);
+            alert('Erro ao enviar cadastro, tente novamente');
+        })
+        
     }
 
     return (
@@ -54,7 +71,9 @@ export default function SignUp() {
                         required
                     />
                     <input
-                        type="text"
+                        type="number"
+                        min='10000000'
+                        max='99999999'
                         placeholder="CEP do endereço"
                         value={cep}
                         onChange={(e) => setCep(e.target.value)}
@@ -67,6 +86,9 @@ export default function SignUp() {
                     </SubmitButton>
                 </form>
             </InputFields>
+            <RedirectLink to='/login' >
+                Já tem senha? Vá para o LogIn!
+            </RedirectLink>
         </>
     );
 }

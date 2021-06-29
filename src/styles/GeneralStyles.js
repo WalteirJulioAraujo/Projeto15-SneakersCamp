@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Logo = styled.div`
@@ -21,6 +22,15 @@ export const InputFields = styled.div`
         border: none;
         padding-left: 32px;
     }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+        
+    }   
+    input[type=number] {
+    -moz-appearance: textfield;
+    }
 `;
 
 export const SubmitButton = styled.button`
@@ -38,3 +48,11 @@ export const SubmitButton = styled.button`
         cursor: pointer;
     }
 `;
+
+export const RedirectLink = styled(Link)`
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    width: fit-content;
+    margin: 10px auto 0 auto;
+`
