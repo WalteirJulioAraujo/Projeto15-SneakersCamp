@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Logo, InputFields, SubmitButton, RedirectLink } from "../styles/GeneralStyles";
 import axios from 'axios';
 
+
 export default function SignUp() {
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");

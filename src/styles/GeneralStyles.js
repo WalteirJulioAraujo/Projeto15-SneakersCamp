@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 export const Logo = styled.div`
     font-family: 'Creepster', cursive;
-    font-size: 64px;
+    font-size: 60px;
     margin-top: 80px;
     text-align: center;
+    color: #FFC947;
 `;
 
 
@@ -38,11 +39,11 @@ export const SubmitButton = styled.button`
     margin: 13px auto 0 auto;
     font-size: 20px;
     font-weight: bold;
-    color: #fff;
+    color: #FFC947;
     border-radius: 5px;
     display: block;
     border: none;
-    background-color: #a328d6;
+    background-color: #185ADB;
     :hover{
         cursor: pointer;
     }
@@ -54,4 +55,5 @@ export const RedirectLink = styled(Link)`
     display: block;
     width: fit-content;
     margin: 10px auto 0 auto;
+    color: #FFC947;
 `
