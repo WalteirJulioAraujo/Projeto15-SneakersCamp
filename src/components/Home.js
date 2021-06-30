@@ -20,9 +20,8 @@ export default function Home() {
         setSneakers(response.data);
         setLoading(false);
       })
-      .catch((e) => {
+      .catch(() => {
         alert("Error");
-        console.log(e);
         setLoading(false);
       });
   }, [filter]);
@@ -40,9 +39,9 @@ export default function Home() {
           {sneakers.map((item, i) => (
             <>
               <Item
-                key={item.i}
+                key={i}
                 onClick={() => console.log(item.id)}
-                condicao={i}
+                condition={i}
                 image={item.image}
               >
                 <p>{item.name}</p>
@@ -110,20 +109,21 @@ const Item = styled.li`
   border: none;
 
   background-image: url(${(props) => props.image});
-  transform: ${(props) => (props.condicao % 2 === 0 ? "rotatey(180deg)" : "")};
+  transform: ${(props) => (props.condition % 2 === 0 ? "rotatey(180deg)" : "")};
   background-size: cover;
   background-position: center;
 
   p {
     display: flex;
     transform: ${(props) =>
-      props.condicao % 2 === 0 ? "rotatey(180deg)" : ""};
+      props.condition % 2 === 0 ? "rotatey(180deg)" : ""};
     margin: 10px;
     font-weight: normal;
     font-size: 15px;
     color: #000;
 
-    justify-content: ${(props) => (props.condicao % 2 === 0 ? "" : "flex-end")};
+    justify-content: ${(props) =>
+      props.condition % 2 === 0 ? "" : "flex-end"};
   }
 
   p:first-child {
