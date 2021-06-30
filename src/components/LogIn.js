@@ -4,13 +4,15 @@ import { Logo, InputFields, SubmitButton, RedirectLink } from "../styles/General
 import axios from 'axios';
 import UserContext from '../contexts/UserContext';
 
-export default function LogIn(){
+export default function LogIn({ setAmILoginOrSingup }){
 
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ disabled, setDisabled ] = useState(false);
     const { setUser } = useContext(UserContext);
     let history = useHistory();
+
+    setAmILoginOrSingup(true);
 
     function sendForms(e){
         e.preventDefault();
