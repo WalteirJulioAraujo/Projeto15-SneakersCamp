@@ -4,8 +4,6 @@ import Loader from "react-loader-spinner";
 import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
 
-import list from "./data";
-
 export default function Home() {
   const { user } = useContext(UserContext);
   const [sneakers, setSneakers] = useState([]);
@@ -14,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     setLoading(true);
-    const config = { headers: { Authorization: `Bearer $ {user.token}` } };
+    const config = { headers: { Authorization: `Bearer ${user?.token}` } };
     let addFilter = "?";
     if (filter.length !== 0) {
       filter.forEach((item) => (addFilter = addFilter + `filter=${item}&`));
@@ -30,7 +28,7 @@ export default function Home() {
         console.log(e);
         setLoading(false);
       });
-  }, []);
+  }, [user?.token, filter]);
 
   return (
     <Container>
