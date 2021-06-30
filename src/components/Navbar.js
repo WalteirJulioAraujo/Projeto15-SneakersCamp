@@ -1,9 +1,5 @@
 import styled from "styled-components";
-import {
-  EllipsisVerticalOutline,
-  PersonOutline,
-  SearchOutline,
-} from "react-ionicons";
+import {EllipsisVerticalOutline,PersonOutline,SearchOutline,} from "react-ionicons";
 
 export default function Navbar() {
   return (

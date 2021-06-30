@@ -1,8 +1,7 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
-import UserContext from "../contexts/UserContext";
 
 export default function Home() {
   const [sneakers, setSneakers] = useState([]);
