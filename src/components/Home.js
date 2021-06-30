@@ -5,20 +5,18 @@ import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
 
 export default function Home() {
-  const { user } = useContext(UserContext);
   const [sneakers, setSneakers] = useState([]);
   const [filter, setFilter] = useState([]); //adicionar os filtros aplicados nesta array
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    const config = { headers: { Authorization: `Bearer ${user?.token}` } };
     let addFilter = "?";
     if (filter.length !== 0) {
       filter.forEach((item) => (addFilter = addFilter + `filter=${item}&`));
     }
     axios
-      .get(`http://localhost:4000/list/sneakers${addFilter}`, config)
+      .get(`http://localhost:4000/list/sneakers${addFilter}`)
       .then((response) => {
         setSneakers(response.data);
         setLoading(false);
