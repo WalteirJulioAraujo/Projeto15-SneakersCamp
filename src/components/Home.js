@@ -8,7 +8,7 @@ import list from "./data";
 
 export default function Home() {
   const { user } = useContext(UserContext);
-  const [sneakers, setSneakers] = useState(list);
+  const [sneakers, setSneakers] = useState([]);
   const [filter, setFilter] = useState([]); //adicionar os filtros aplicados nesta array
   const [loading, setLoading] = useState(false);
 
@@ -39,12 +39,13 @@ export default function Home() {
           <Loader type="Oval" color="#ffc947" height={80} width={80} />
         </p>
       ) : sneakers.length === 0 ? (
-        <p>FIM DO ESTOQUE!!</p>
+        <p>Nenhum tênis encontrado!!</p>
       ) : (
         <ul>
           {sneakers.map((item, i) => (
             <>
               <Item
+                key={item.i}
                 onClick={() => console.log(item.id)}
                 condicao={i}
                 image={item.image}
