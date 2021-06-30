@@ -42,6 +42,7 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
 
   background-color: #0a1931;
   color: #ffc947;
@@ -63,6 +64,6 @@ const Container = styled.div`
   }
 
   @media (max-width: 640px) {
-    font-size: 24px;
+    font-size: 30px;
   }
 `;
