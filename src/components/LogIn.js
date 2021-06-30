@@ -12,7 +12,8 @@ export default function LogIn(){
     const { setUser } = useContext(UserContext);
     let history = useHistory();
 
-    function sendForms(){
+    function sendForms(e){
+        e.preventDefault();
         setDisabled(true);
         if(!email.trim()){
             setDisabled(false);
