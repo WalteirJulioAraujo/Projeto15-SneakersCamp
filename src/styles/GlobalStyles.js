@@ -1,8 +1,9 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-    .body{
+    body{
         font-family: 'Raleway', sans-serif;
+        background-color: #185adb;
     }
 `;
 
