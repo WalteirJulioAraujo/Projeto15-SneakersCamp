@@ -4,7 +4,7 @@ import { Logo, InputFields, SubmitButton, RedirectLink } from "../styles/General
 import axios from 'axios';
 
 
-export default function SignUp({ setAmILoginOrSingup }) {
+export default function SignUp({ setAmILoginOrSingup }){
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
