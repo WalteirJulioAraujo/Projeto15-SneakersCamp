@@ -94,7 +94,6 @@ const Container = styled.div`
     flex-wrap: nowrap;
     ul {
       margin: 65px auto;
-      justify-content: space-between;
 
       div {
         display: none;
@@ -105,7 +104,8 @@ const Container = styled.div`
 
 const Item = styled.li`
   width: 80%;
-  max-width: 323px;
+  max-width: 300px;
+  min-width: 226px;
   height: 300px;
 
   margin-bottom: 40px;
@@ -142,5 +142,6 @@ const Item = styled.li`
 
   @media (min-width: 640px) {
     width: 50%;
+    height: 350px;
   }
 `;
