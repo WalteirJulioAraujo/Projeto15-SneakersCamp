@@ -26,7 +26,7 @@ export default function Home() {
         console.log(e);
         setLoading(false);
       });
-  }, [user?.token, filter]);
+  }, [filter]);
 
   return (
     <Container>
