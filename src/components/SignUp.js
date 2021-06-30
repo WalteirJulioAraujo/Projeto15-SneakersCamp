@@ -4,7 +4,7 @@ import { Logo, InputFields, SubmitButton, RedirectLink } from "../styles/General
 import axios from 'axios';
 
 
-export default function SignUp() {
+export default function SignUp({ setAmILoginOrSingup }) {
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
@@ -13,21 +13,35 @@ export default function SignUp() {
     const [ disabled, setDisabled ] = useState(false);
     let history = useHistory();
 
+    setAmILoginOrSingup(true);
+
     function sendForms(e) {
         e.preventDefault();
         setDisabled(true);
 
-        if(password !== confirmPassword) return alert('As senhas não batem');
-        if(!name.trim() || name.length<3) return alert('Você deve preencher o campo nome e deve ter ao menos 3 caracteres');
-        if(password.length < 3) return alert('A senha deve ter ao menos 3 dígitos');
+        if(password !== confirmPassword){
+            setDisabled(false);
+            return alert('As senhas não batem');
+        } 
+        if(!name.trim() || name.length<3){
+            setDisabled(false);
+            return alert('Você deve preencher o campo nome e deve ter ao menos 3 caracteres');
+        }
+        if(password.length < 3) {
+            setDisabled(false);
+            return alert('A senha deve ter ao menos 3 dígitos');
+        }
     
         const body = { name, email, password, cep };
-        console.log(body)
         const request = axios.post('http://localhost:4000/signup',body);
         request.then(()=>history.push('/login'));
-        request.catch(()=>{
+        request.catch((e)=>{
             setDisabled(false);
-            alert('Erro ao enviar cadastro, tente novamente');
+            if(e.response.status === 409){
+                alert('O email já existe')
+            }else{
+                alert('Erro ao enviar cadastro, tente novamente');
+            }
         })
         
     }

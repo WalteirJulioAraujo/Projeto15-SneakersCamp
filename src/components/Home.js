@@ -1,7 +1,9 @@
-export default function Home(){
-    return(
-        <div>
-            Home
-        </div>
-    );
+import styled from "styled-components";
+
+export default function Home() {
+  return <Container>Home</Container>;
 }
+
+const Container = styled.div`
+  margin-top: 63px;
+`;

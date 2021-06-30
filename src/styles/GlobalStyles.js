@@ -1,9 +1,9 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     body{
         font-family: 'Raleway', sans-serif;
-        background-color: #0A1931;
+        background-color: ${ props => props.amILoginOrSingup ? '#0A1931' : '#185adb' } ;
     }
 `;
 
