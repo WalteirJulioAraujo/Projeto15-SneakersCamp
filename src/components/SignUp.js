@@ -18,10 +18,10 @@ export default function SignUp() {
         setDisabled(true);
 
         if(password !== confirmPassword) return alert('As senhas não batem');
-        if(!name.trim()) return alert('Você deve preencher o campo nome');
+        if(!name.trim() || name.length<3) return alert('Você deve preencher o campo nome e deve ter ao menos 3 caracteres');
         if(password.length < 3) return alert('A senha deve ter ao menos 3 dígitos');
     
-        const body = { name, email, password, cep }
+        const body = { name, email, password, cep };
         console.log(body)
         const request = axios.post('http://localhost:4000/signup',body);
         request.then(()=>history.push('/login'));
