@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import {EllipsisVerticalOutline,PersonOutline,SearchOutline,} from "react-ionicons";
+import { Menu, PersonOutline, SearchOutline } from "react-ionicons";
 
 export default function Navbar() {
   return (
     <Container>
       <div>
-        <EllipsisVerticalOutline
+        <Menu
           onClick={() => console.log("Abre aí")}
           color={"#ffc947"}
-          height="25px"
-          width="25px"
+          height="30px"
+          width="30px"
         />
       </div>
       SNEAKERSCAMP
