@@ -5,34 +5,41 @@ import LogIn from "./LogIn.js";
 import SignUp from "./SignUp.js";
 import Cart from "./Cart.js";
 import Navbar from "./Navbar.js";
+import CartIcon from "./CartIcon.js";
 import GlobalStyle from "../styles/GlobalStyles.js";
 import UserContext from "../contexts/UserContext.js";
-
+import CartContext from "../contexts/CartContext.js";
 
 export default function App() {
-
-  const [ user, setUser ] = useState(undefined);
-  const [ amILoginOrSingup, setAmILoginOrSingup ] = useState(false);
+  const [user, setUser] = useState(undefined);
+  const [cart, setCart] = useState([{ quantity: 2 }, { quantity: 5 }]); //name,quantity,price,image,size
+  const [amILoginOrSingup, setAmILoginOrSingup] = useState(false);
 
   return (
     <>
       <UserContext.Provider value={{ user, setUser }}>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/" exact>
-              <Navbar />
-              <Home />
-            </Route>
-            <Route path="/login" exact>
-              <LogIn setAmILoginOrSingup={setAmILoginOrSingup} />
-            </Route>
-            <Route path="/signup" exact>
-              <SignUp setAmILoginOrSingup={setAmILoginOrSingup}/>
-            </Route>
-            <Route path="/cart" exact component={(Navbar, Cart)} />
-          </Switch>
-        </BrowserRouter>
-        <GlobalStyle amILoginOrSingup={amILoginOrSingup}/>
+        <CartContext.Provider value={{ cart, setCart }}>
+          <BrowserRouter>
+            <Switch>
+              <Route path="/" exact>
+                <Navbar />
+                <Home />
+                <CartIcon />
+              </Route>
+              <Route path="/login" exact>
+                <LogIn setAmILoginOrSingup={setAmILoginOrSingup} />
+              </Route>
+              <Route path="/signup" exact>
+                <SignUp setAmILoginOrSingup={setAmILoginOrSingup} />
+              </Route>
+              <Route path="/cart" exact>
+                <Navbar />
+                <Cart />
+              </Route>
+            </Switch>
+          </BrowserRouter>
+          <GlobalStyle amILoginOrSingup={amILoginOrSingup} />
+        </CartContext.Provider>
       </UserContext.Provider>
     </>
   );
