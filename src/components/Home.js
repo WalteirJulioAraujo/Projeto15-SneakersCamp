@@ -46,8 +46,7 @@ export default function Home() {
               >
                 <p>{item.name}</p>
                 <p>R$ {(item.price / 100).toFixed(2).replace(".", ",")}</p>
-              </Item>
-              <div></div>
+              </Item> 
             </>
           ))}
         </ul>

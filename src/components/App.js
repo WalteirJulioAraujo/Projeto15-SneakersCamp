@@ -7,16 +7,18 @@ import Cart from "./Cart.js";
 import Navbar from "./Navbar.js";
 import GlobalStyle from "../styles/GlobalStyles.js";
 import UserContext from "../contexts/UserContext.js";
-
+import CartContext from "../contexts/CartContext.js";
 
 export default function App() {
 
   const [ user, setUser ] = useState(undefined);
   const [ amILoginOrSingup, setAmILoginOrSingup ] = useState(false);
+  const [ cart, setCart ] = useState("");
 
   return (
     <>
       <UserContext.Provider value={{ user, setUser }}>
+      <CartContext.Provider value={{ cart, setCart }}>
         <BrowserRouter>
           <Switch>
             <Route path="/" exact>
@@ -33,6 +35,7 @@ export default function App() {
           </Switch>
         </BrowserRouter>
         <GlobalStyle amILoginOrSingup={amILoginOrSingup}/>
+      </CartContext.Provider>
       </UserContext.Provider>
     </>
   );
