@@ -40,6 +40,14 @@ export default function Navbar() {
     </Container>
     <ClientMenu showClientMenu={showClientMenu} >
       <p>Olá, {user?user.name:'visitante'}</p>
+      {user
+      ?""
+      : <>
+            <ClientMenuButton to='/login'>Faça seu login</ClientMenuButton>
+            <p>ou</p>
+            <ClientMenuButton to='/signup' >Cadastre-se</ClientMenuButton>
+        </>
+      }
     </ClientMenu>
     </>
   );
@@ -91,7 +99,7 @@ const Container = styled.div`
 const ClientMenu = styled.div`
   display:${props=>props.showClientMenu?'':'none'};
   width: 180px;
-  height: 140px;
+  height: 150px;
   background-color: #0a1931;
   border-top: 1px solid  #ffc947;
   border-bottom-left-radius: 5px;
@@ -107,3 +115,20 @@ const ClientMenu = styled.div`
     font-weight: bold;
   }
 `
+const ClientMenuButton = styled(Link)`
+  width: 90%;
+  height: 30px;
+  display: block;
+  margin: 10px auto 0 auto ;
+  background-color: #ffc947;
+  color: #0a1931;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+
+  :hover{
+    cursor: pointer;
+  }
+
+`;
