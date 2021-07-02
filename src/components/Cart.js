@@ -3,8 +3,10 @@ import { useHistory } from "react-router-dom";
 import styled, { css } from "styled-components";
 import CartContext from "../contexts/CartContext";
 import { AddCircleSharp, RemoveCircleSharp } from "react-ionicons";
+import UserContext from "../contexts/UserContext";
 
 export default function Cart({ setAmILoginOrSingup }) {
+  const { user } = useContext(UserContext);
   const { cart, setCart } = useContext(CartContext);
   const [total, setTotal] = useState(0);
   const history = useHistory();
@@ -68,7 +70,13 @@ export default function Cart({ setAmILoginOrSingup }) {
           type="button"
           value="Continuar para pagamento"
           disabled={!cart}
-          onClick={() => history.push("/payment")}
+          onClick={() => {
+            if (user) {
+              history.push("/payment");
+            } else {
+              history.push("/login");
+            }
+          }}
         />
       )}
 

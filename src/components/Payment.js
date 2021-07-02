@@ -28,12 +28,13 @@ export default function Payment() {
   }, []);
 
   function payment() {
-    const body = {
-      sneakers: { sneakerId, size, quantity },
-      userId,
-      shippingAddress,
-      value,
-    };
+    const body = {};
+    // const body = {
+    //   sneakers: { sneakerId, size, quantity },
+    //   userId,
+    //   shippingAddress,
+    //   value,
+    // };
     const config = { headers: { Authorization: `Bearer ${user.token}` } };
     axios
       .post("#", body, config)
@@ -53,16 +54,16 @@ export default function Payment() {
       <p>Frete</p>
       <Address>
         <p>
-          Rua <span>{address.logradouro}</span>
+          Rua <span>{address?.logradouro}</span>
         </p>
         <p>
-          Bairro <span>{address.bairro}</span>
+          Bairro <span>{address?.bairro}</span>
         </p>
         <p>
-          Cidade <span>{address.localidade}</span>
+          Cidade <span>{address?.localidade}</span>
         </p>
         <p>
-          CEP <span>{address.cep}</span>
+          CEP <span>{address?.cep}</span>
         </p>
       </Address>
       <div>

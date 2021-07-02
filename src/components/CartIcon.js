@@ -8,7 +8,7 @@ export default function CartIcon() {
   const { cart } = useContext(CartContext);
   const history = useHistory();
   let amount = 0;
-  if (cart !== null) {
+  if (cart) {
     cart.forEach((item) => (amount += item.quantity));
   }
   return (
@@ -37,10 +37,6 @@ const Circle = styled.div`
 
   :hover {
     cursor: pointer;
-  }
-
-  @media (min-width: 640px) {
-    //top: 93px;
   }
 `;
 
