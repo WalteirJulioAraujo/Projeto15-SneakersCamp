@@ -1,18 +1,23 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled, { css } from "styled-components";
 import CartContext from "../contexts/CartContext";
 import { AddCircleSharp, RemoveCircleSharp } from "react-ionicons";
 
-export default function Cart() {
+export default function Cart({ setAmILoginOrSingup }) {
   const { cart, setCart } = useContext(CartContext);
   const [total, setTotal] = useState(0);
   const history = useHistory();
-  if (cart) {
-    cart.forEach((item) => {
-      setTotal(total + item.price * item.quantity);
-    });
-  }
+  console.log(cart);
+
+  setAmILoginOrSingup(false);
+  useEffect(() => {
+    if (cart) {
+      cart.forEach((item) => {
+        setTotal(total + item.price * item.quantity);
+      });
+    }
+  }, []);
 
   return (
     <Container cart={cart}>
@@ -77,6 +82,7 @@ export default function Cart() {
 }
 
 const Container = styled.div`
+  width: 100%;
   height: 100%;
   margin: 63px auto 0px;
 
@@ -92,7 +98,8 @@ const Container = styled.div`
 
   input {
     width: 100%;
-    max-width: 630px;
+    min-width: fit-content;
+    /* max-width: 630px; */
     height: 45px;
 
     border-radius: 5px;
@@ -105,12 +112,16 @@ const Container = styled.div`
     background-color: #0a1931;
 
     margin: 5px auto;
+
+    :hover {
+      cursor: pointer;
+    }
   }
 
   ul {
     margin: 0 auto;
     width: 100%;
-    max-width: 578px;
+    /* max-width: 578px; */
     height: 50vh;
 
     padding-bottom: 15px;
@@ -123,8 +134,9 @@ const Container = styled.div`
   }
 
   > div {
-    max-width: 630px;
-    margin: 10px 0;
+    /* max-width: 630px; */
+    width: 100%;
+    margin: 10px auto 0 auto;
     padding: 0 10px;
   }
 
