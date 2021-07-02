@@ -12,8 +12,7 @@ export default function BuyInfo({info,setShowBuyInfo}){
     const [ qtd, setQtd ] = useState(0);
     const [ lastUnits, setLastUnits ] = useState(false);
     const { cart ,setCart } = useContext(CartContext);
-
-    console.log(availabeSizes);
+    console.log(cart);
     useEffect(()=>{
         const request = axios.get(`http://localhost:4000/stock/${info.id}`);
         request.then((e)=>{
@@ -52,6 +51,9 @@ export default function BuyInfo({info,setShowBuyInfo}){
 
     function ToCart(e){
         e.stopPropagation();
+        if(sizeSelect===0){
+            return;
+        }
         setShowBuyInfo(false);
         setCart({...cart,sneakerInfo: info , sneakerSize: sizeSelect, sneakerQtd: qtd});
         alert('o item foi adicionado ao carrinho');
@@ -79,7 +81,7 @@ export default function BuyInfo({info,setShowBuyInfo}){
         <>
             <p>{info.description}</p>
             <Sizes>
-                {size.map((e)=><Size num={e} setSizeSelect={setSizeSelect} selected={e===sizeSelect?true:false} availabeSizes={availabeSizes} checkMaxQuantity={checkMaxQuantity} />)}
+                {size.map((e)=><Size num={e} setSizeSelect={setSizeSelect} selected={e===sizeSelect?true:false} availabeSizes={availabeSizes} checkMaxQuantity={checkMaxQuantity} setQtd={setQtd} />)}
             </Sizes>
             {lastUnits && sizeSelect
             ?<LastUnits>{`Corra,temos apenas ${lastUnits} unidade!`}</LastUnits>

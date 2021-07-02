@@ -2,7 +2,7 @@ import {  useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 
-export default function Size({num,setSizeSelect,selected,availabeSizes,checkMaxQuantity}){
+export default function Size({num,setSizeSelect,selected,availabeSizes,checkMaxQuantity,setQtd}){
 
     const [ select, setSelect ] = useState(false);
 
@@ -13,6 +13,7 @@ export default function Size({num,setSizeSelect,selected,availabeSizes,checkMaxQ
         if(disabled) return;
         setSelect(!select);
         setSizeSelect(num);
+        setQtd(1);
     }
 
     checkMaxQuantity();
