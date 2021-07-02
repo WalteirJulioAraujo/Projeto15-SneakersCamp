@@ -40,7 +40,11 @@ export default function Payment() {
     };
     const config = { headers: { Authorization: `Bearer ${user.token}` } };
     axios
-      .post("https://back-projeto-sneakercamp.herokuapp.com/payment", body, config)
+      .post(
+        "https://back-projeto-sneakercamp.herokuapp.com/payment",
+        body,
+        config
+      )
       .then(() => {
         setPaid(true);
         setCart();
@@ -130,6 +134,9 @@ const Container = styled.div`
     width: 100%;
     max-width: 630px;
     height: 45px;
+
+    display: block;
+    margin: 0 auto;
 
     border-radius: 5px;
     border: none;
