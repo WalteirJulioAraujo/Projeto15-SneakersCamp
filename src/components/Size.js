@@ -12,6 +12,11 @@ export default function Size({num,setSizeSelect,selected,availabeSizes,checkMaxQ
         e.stopPropagation();
         if(disabled) return;
         setSelect(!select);
+        if(select){
+            setQtd(0);
+            setSizeSelect(0);
+            return;
+        }
         setSizeSelect(num);
         setQtd(1);
     }
