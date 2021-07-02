@@ -16,8 +16,8 @@ export default function Navbar() {
           className='icon'
           onClick={() => console.log("Abre aí")}
           color={"#ffc947"}
-          height="30px"
-          width="30px"
+          height="35px"
+          width="35px"
         />
       </div>
       <Link to="/">SNEAKERSCAMP</Link>
@@ -26,15 +26,15 @@ export default function Navbar() {
           className='icon'
           onClick={() => console.log("Procura aí")}
           color={"#ffc947"}
-          height="25px"
-          width="25px"
+          height="30px"
+          width="30px"
         />
         <PersonOutline
           className='icon'
           onClick={() => setShowClientMenu(!showClientMenu)}
           color={"#ffc947"}
-          height="25px"
-          width="25px"
+          height="30px"
+          width="30px"
         />
       </div>
     </Container>
@@ -74,7 +74,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    width: 60px;
+    width: 70px;
     margin-left: 10px;
     margin-right: 10px;
 
