@@ -1,4 +1,6 @@
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import CartContext from "../contexts/CartContext";
 import UserContext from "../contexts/UserContext";
@@ -9,17 +11,39 @@ export default function Payment() {
   const { cart } = useContext(CartContext);
   const [total, setTotal] = useState(0);
   const [address, setAddress] = useState();
+  const history = useHistory();
+
+  if (!user) {
+    history.push("/");
+  }
+
   if (cart) {
     cart.forEach((item) => {
       setTotal(total + item.price * item.quantity);
     });
   }
+
   useEffect(() => {
     correios(setAddress, user);
   }, []);
+
+  function payment() {
+    const body = {
+      sneakers: { sneakerId, size, quantity },
+      userId,
+      shippingAddress,
+      value,
+    };
+    const config = { headers: { Authorization: `Bearer ${user.token}` } };
+    axios
+      .post("#", body, config)
+      .then()
+      .catch(() => console.log("não comprado"));
+  }
+
   return (
     <Container>
-      <p>{user?.name || "Fernando"}, vamos para o último passo!</p>
+      <p>{user.name}, vamos para o último passo!</p>
       <div className="subtotal">
         <p>Subtotal</p>
         <p>
@@ -29,16 +53,16 @@ export default function Payment() {
       <p>Frete</p>
       <Address>
         <p>
-          Rua: <span>{address?.logradouro}</span>
+          Rua <span>{address.logradouro}</span>
         </p>
         <p>
-          Bairro: <span>{address?.bairro}</span>
+          Bairro <span>{address.bairro}</span>
         </p>
         <p>
-          Cidade: <span>{address?.localidade}</span>
+          Cidade <span>{address.localidade}</span>
         </p>
         <p>
-          CEP: <span>{address?.cep}</span>
+          CEP <span>{address.cep}</span>
         </p>
       </Address>
       <div>
@@ -51,11 +75,7 @@ export default function Payment() {
         <p>TOTAL</p>
         <p>R$ {((total + 1500) / 100).toFixed(2).replace(".", ",")}</p>
       </div>
-      <input
-        type="button"
-        value="Pagar"
-        onClick={() => console.log("Opa, quero pagar")}
-      />
+      <input type="button" value="Pagar" onClick={payment} />
     </Container>
   );
 }
