@@ -1,21 +1,23 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import CartContext from "../contexts/CartContext";
 import { AddCircleSharp, RemoveCircleSharp } from "react-ionicons";
 
-export default function Cart({setAmILoginOrSingup}) {
+export default function Cart({ setAmILoginOrSingup }) {
   const { cart, setCart } = useContext(CartContext);
   const [total, setTotal] = useState(0);
   const history = useHistory();
+  console.log(cart);
 
   setAmILoginOrSingup(false);
-
-  if (cart) {
-    cart.forEach((item) => {
-      setTotal(total + item.price * item.quantity);
-    });
-  }
+  useEffect(() => {
+    if (cart) {
+      cart.forEach((item) => {
+        setTotal(total + item.price * item.quantity);
+      });
+    }
+  }, []);
 
   return (
     <Container>
@@ -73,7 +75,7 @@ export default function Cart({setAmILoginOrSingup}) {
 }
 
 const Container = styled.div`
-  width: 80%;
+  width: 100%;
   height: 100%;
   margin: 63px auto 0px;
 
@@ -104,10 +106,9 @@ const Container = styled.div`
 
     margin: 5px auto;
 
-    :hover{
-      cursor:pointer;       
+    :hover {
+      cursor: pointer;
     }
-
   }
 
   ul {
@@ -123,7 +124,7 @@ const Container = styled.div`
 
   > div {
     /* max-width: 630px; */
-    width:100%;
+    width: 100%;
     margin: 10px auto 0 auto;
     padding: 0 10px;
   }

@@ -8,9 +8,9 @@ export default function CartIcon() {
   const { cart } = useContext(CartContext);
   const history = useHistory();
   let amount = 0;
-  // if(cart!==null){
-  //   cart.forEach((item) => (amount += item.quantity));
-  // }
+  if (cart !== null) {
+    cart.forEach((item) => (amount += item.quantity));
+  }
   return (
     <Circle onClick={() => history.push("/cart")}>
       <Cart color={"#FFC947"} height="40px" width="40px" />
@@ -35,7 +35,7 @@ const Circle = styled.div`
   bottom: 20px;
   right: 20px;
 
-  :hover{
+  :hover {
     cursor: pointer;
   }
 
