@@ -10,7 +10,7 @@ export default function BuyInfo({info,setShowBuyInfo}){
     const [ availabeSizes, setAvailabeSizes ] = useState([]);
     const [ maxQtd, setMaxQtd ] = useState(0);
     const [ qtd, setQtd ] = useState(0);
-
+    const [ lastUnits, setLastUnits ] = useState(false);
     const { cart ,setCart } = useContext(CartContext);
 
     console.log(availabeSizes);
@@ -35,12 +35,7 @@ export default function BuyInfo({info,setShowBuyInfo}){
         if(sizeSelect===0){
             return;
         }
-        let max = 0;
-        maxQtd.map((e)=>{
-            if(e.size===sizeSelect){
-                max=e.quantity;
-            }
-        })
+        const max = checkMaxQuantity();
         if(qtd===max){
             return;
         }
@@ -52,12 +47,6 @@ export default function BuyInfo({info,setShowBuyInfo}){
         if(qtd===0){
             return;
         }
-        let max = 0;
-        maxQtd.map((e)=>{
-            if(e.size===sizeSelect){
-                max=e.quantity;
-            }
-        })
         setQtd(qtd-1);
     }
 
@@ -68,12 +57,34 @@ export default function BuyInfo({info,setShowBuyInfo}){
         alert('o item foi adicionado ao carrinho');
     }
 
+    function checkMaxQuantity(){
+        let max = 0;
+        if(maxQtd===0){
+            return;
+        }
+        maxQtd.map((e)=>{
+            if(e.size===sizeSelect){
+                max=e.quantity;
+            }
+        })
+        if(max<3){
+            setLastUnits(max);
+        }else{
+            setLastUnits(false);
+        }
+        return max;
+    }
+
     return(
         <>
             <p>{info.description}</p>
             <Sizes>
-                {size.map((e)=><Size num={e} setSizeSelect={setSizeSelect} selected={e===sizeSelect?true:false} availabeSizes={availabeSizes}/>)}
+                {size.map((e)=><Size num={e} setSizeSelect={setSizeSelect} selected={e===sizeSelect?true:false} availabeSizes={availabeSizes} checkMaxQuantity={checkMaxQuantity} />)}
             </Sizes>
+            {lastUnits && sizeSelect
+            ?<LastUnits>{`Corra,temos apenas ${lastUnits} unidade!`}</LastUnits>
+            :''
+            }
             <Quantity>
                 <div onClick={Remove} >-</div>
                 <p>{qtd}</p>
@@ -133,4 +144,10 @@ const AddToCart = styled.button`
     :hover{
         cursor: pointer;
     }
+`;
+
+const LastUnits = styled.div`
+    width: fit-content;
+    margin: 5px auto;
+    color: red;
 `

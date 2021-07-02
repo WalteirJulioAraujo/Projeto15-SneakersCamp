@@ -1,8 +1,8 @@
-import {  useState } from 'react';
+import {  useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 
-export default function Size({num,setSizeSelect,selected,availabeSizes}){
+export default function Size({num,setSizeSelect,selected,availabeSizes,checkMaxQuantity}){
 
     const [ select, setSelect ] = useState(false);
 
@@ -15,6 +15,7 @@ export default function Size({num,setSizeSelect,selected,availabeSizes}){
         setSizeSelect(num);
     }
 
+    checkMaxQuantity();
 
     return(
         <SizeButton onClick={selectSize} select={select} selected={selected} disabled={disabled} >{num}</SizeButton>
