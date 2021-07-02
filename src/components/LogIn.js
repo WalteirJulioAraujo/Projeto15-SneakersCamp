@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Logo, InputFields, SubmitButton, RedirectLink } from "../styles/GeneralStyles";
 import axios from 'axios';
 import UserContext from '../contexts/UserContext';
@@ -43,7 +43,7 @@ export default function LogIn({ setAmILoginOrSingup }){
     return (
         <>
             <Logo>
-                SneakersCamp
+                <Link to="/" >SneakersCamp</Link>
             </Logo>
             <InputFields>
                 <form onSubmit={sendForms}>

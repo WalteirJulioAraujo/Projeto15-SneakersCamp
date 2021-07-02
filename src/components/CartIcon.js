@@ -35,6 +35,10 @@ const Circle = styled.div`
   bottom: 20px;
   right: 20px;
 
+  :hover{
+    cursor: pointer;
+  }
+
   @media (min-width: 640px) {
     //top: 93px;
   }
