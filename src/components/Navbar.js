@@ -5,8 +5,13 @@ import { useContext, useState } from "react";
 import UserContext from "../contexts/UserContext";
 
 export default function Navbar() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [ showClientMenu, setShowClientMenu ] = useState(false);
+
+  function Logout(){
+    setUser(undefined);
+    console.log('asdhsidjsdj')
+  }
 
   return (
     <>
@@ -41,11 +46,15 @@ export default function Navbar() {
     <ClientMenu showClientMenu={showClientMenu} >
       <p>Olá, {user?user.name:'visitante'}</p>
       {user
-      ?""
+      ? <>
+          <ClientMenuButton to=''>Meus pedidos</ClientMenuButton>
+          <p>ou</p>
+          <ExitMenuButton onClick={Logout}>Sair</ExitMenuButton>
+        </>
       : <>
             <ClientMenuButton to='/login'>Faça seu login</ClientMenuButton>
             <p>ou</p>
-            <ClientMenuButton to='/signup' >Cadastre-se</ClientMenuButton>
+            <ClientMenuButton to='/signup'>Cadastre-se</ClientMenuButton>
         </>
       }
     </ClientMenu>
@@ -116,6 +125,24 @@ const ClientMenu = styled.div`
   }
 `
 const ClientMenuButton = styled(Link)`
+  width: 90%;
+  height: 30px;
+  display: block;
+  margin: 10px auto 0 auto ;
+  background-color: #ffc947;
+  color: #0a1931;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+
+  :hover{
+    cursor: pointer;
+  }
+
+`;
+
+const ExitMenuButton = styled.div`
   width: 90%;
   height: 30px;
   display: block;
