@@ -102,7 +102,7 @@ export default function SignUp({ setAmILoginOrSingup }){
                 </form>
             </InputFields>
             <RedirectLink to='/login' >
-                Já tem senha? Vá para o LogIn!
+                Já tem conta? Vá para o LogIn!
             </RedirectLink>
         </>
     );

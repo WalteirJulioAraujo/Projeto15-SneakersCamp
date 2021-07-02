@@ -69,7 +69,7 @@ export default function LogIn({ setAmILoginOrSingup }){
                     </SubmitButton>
                 </form>
             </InputFields>
-            <RedirectLink to='/signup' >
+            <RedirectLink to='/signup'>
                 Ainda não tem conta? Cadastre-se Aqui!
             </RedirectLink>
         </>
