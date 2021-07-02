@@ -40,7 +40,7 @@ export default function Payment() {
     };
     const config = { headers: { Authorization: `Bearer ${user.token}` } };
     axios
-      .post("http://localhost:4000/payment", body, config)
+      .post("https://back-projeto-sneakercamp.herokuapp.com/payment", body, config)
       .then(() => {
         setPaid(true);
         setCart();

@@ -13,7 +13,7 @@ export default function BuyInfo({ info, setShowBuyInfo }) {
   const [lastUnits, setLastUnits] = useState(false);
   const { cart, setCart } = useContext(CartContext);
   useEffect(() => {
-    const request = axios.get(`http://localhost:4000/stock/${info.id}`);
+    const request = axios.get(`https://back-projeto-sneakercamp.herokuapp.com/stock/${info.id}`);
     request.then((e) => {
       const allsizes = [];
       const qtdsizes = [];

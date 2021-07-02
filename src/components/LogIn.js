@@ -26,7 +26,7 @@ export default function LogIn({ setAmILoginOrSingup }){
             return alert('Você deve preencher o campo senha!')
         }
         const body = { email, password };
-        const request = axios.post('http://localhost:4000/login',body);
+        const request = axios.post('https://back-projeto-sneakercamp.herokuapp.com/login',body);
         request.then((e)=>{
             //Vai chegar do back { name, token }
             setUser(e.data);

@@ -41,7 +41,7 @@ export default function SignUp({ setAmILoginOrSingup }) {
     }
 
     const body = { name, email, password, cep };
-    const request = axios.post("http://localhost:4000/signup", body);
+    const request = axios.post("https://back-projeto-sneakercamp.herokuapp.com/signup", body);
     request.then(() => {
       history.push("/login");
     });

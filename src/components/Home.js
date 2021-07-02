@@ -16,7 +16,7 @@ export default function Home({ setAmILoginOrSingup }) {
       filter.forEach((item) => (addFilter = addFilter + `filter=${item}&`));
     }
     axios
-      .get(`http://localhost:4000/list/sneakers${addFilter}`)
+      .get(`https://back-projeto-sneakercamp.herokuapp.com/list/sneakers${addFilter}`)
       .then((response) => {
         setSneakers(response.data);
         setLoading(false);

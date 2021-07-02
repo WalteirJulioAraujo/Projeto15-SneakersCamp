@@ -10,7 +10,6 @@ export default function Navbar() {
 
   function Logout(){
     setUser(undefined);
-    console.log('asdhsidjsdj')
   }
 
   return (
