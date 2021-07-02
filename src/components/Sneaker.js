@@ -18,7 +18,7 @@ export default function Sneaker( { info } ){
             <div className="imageDiv" ></div>
             <span>{`${info.name}`}<br/>{`R$ ${priceFormat}`}</span>
             {showBuyInfo
-            ?<BuyInfo info={info} />
+            ?<BuyInfo info={info} setShowBuyInfo={setShowBuyInfo} />
             :""
             }
         </SneakerContainer>

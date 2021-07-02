@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from "styled-components";
 import Size from './Size.js';
 import axios from 'axios';
+import CartContext from '../contexts/CartContext.js';
 
-export default function BuyInfo({info}){
+export default function BuyInfo({info,setShowBuyInfo}){
     const size = [38,39,40,41,42,43,44,45]
     const [sizeSelect,setSizeSelect] = useState(0);
     const [ availabeSizes, setAvailabeSizes ] = useState([]);
     const [ maxQtd, setMaxQtd ] = useState(0);
     const [ qtd, setQtd ] = useState(0);
+
+    const { cart ,setCart } = useContext(CartContext);
 
     console.log(availabeSizes);
     useEffect(()=>{
@@ -58,6 +61,13 @@ export default function BuyInfo({info}){
         setQtd(qtd-1);
     }
 
+    function ToCart(e){
+        e.stopPropagation();
+        setShowBuyInfo(false);
+        setCart({...cart,sneakerInfo: info , sneakerSize: sizeSelect, sneakerQtd: qtd});
+        alert('o item foi adicionado ao carrinho');
+    }
+
     return(
         <>
             <p>{info.description}</p>
@@ -69,6 +79,7 @@ export default function BuyInfo({info}){
                 <p>{qtd}</p>
                 <div onClick={Add} >+</div>
             </Quantity>
+            <AddToCart onClick={ToCart}>Adicionar ao carrinho</AddToCart>
         </>
     )
 }
@@ -105,5 +116,21 @@ const Quantity = styled.div`
         margin-left: 5px;
         margin-right: 5px;
     }
-
 `;
+
+const AddToCart = styled.button`
+    width: fit-content;
+    height: 46px;
+    display: block;
+    border:none;
+    border-radius: 5px;
+    background-color:#0a1931;
+    color: #ffc947;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px auto 0 auto;
+
+    :hover{
+        cursor: pointer;
+    }
+`
