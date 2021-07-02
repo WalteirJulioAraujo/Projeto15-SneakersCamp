@@ -10,7 +10,6 @@ export default function Cart({ setAmILoginOrSingup }) {
   const { cart, setCart } = useContext(CartContext);
   const [total, setTotal] = useState(0);
   const history = useHistory();
-  console.log(cart);
 
   setAmILoginOrSingup(false);
   useEffect(() => {
