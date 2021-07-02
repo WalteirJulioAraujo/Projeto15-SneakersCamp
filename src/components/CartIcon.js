@@ -36,7 +36,7 @@ const Circle = styled.div`
   right: 20px;
 
   @media (min-width: 640px) {
-    top: 93px;
+    //top: 93px;
   }
 `;
 
