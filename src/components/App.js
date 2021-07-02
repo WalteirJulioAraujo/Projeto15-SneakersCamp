@@ -1,7 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useState } from "react";
-import Home from "./Home.js";
-import Home2 from './Home2';
+import Home from "./Home";
 import LogIn from "./LogIn.js";
 import SignUp from "./SignUp.js";
 import Cart from "./Cart.js";
@@ -24,7 +23,7 @@ export default function App() {
           <Switch>
             <Route path="/" exact>
               <Navbar />
-              <Home2 />
+              <Home />
             </Route>
             <Route path="/login" exact>
               <LogIn setAmILoginOrSingup={setAmILoginOrSingup} />
