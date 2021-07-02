@@ -1,6 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useState } from "react";
-import Home from "./Home.js";
+import Home from "./Home";
 import LogIn from "./LogIn.js";
 import SignUp from "./SignUp.js";
 import Cart from "./Cart.js";
@@ -11,9 +11,10 @@ import UserContext from "../contexts/UserContext.js";
 import CartContext from "../contexts/CartContext.js";
 
 export default function App() {
-  const [user, setUser] = useState(undefined);
-  const [cart, setCart] = useState(null); //name,quantity,price,image,size
-  const [amILoginOrSingup, setAmILoginOrSingup] = useState(false);
+
+  const [ user, setUser ] = useState(undefined);
+  const [ amILoginOrSingup, setAmILoginOrSingup ] = useState(false);
+  const [ cart, setCart ] = useState("");
 
   return (
     <>
