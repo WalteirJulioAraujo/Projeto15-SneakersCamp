@@ -4,10 +4,13 @@ import styled from "styled-components";
 import CartContext from "../contexts/CartContext";
 import { AddCircleSharp, RemoveCircleSharp } from "react-ionicons";
 
-export default function Cart() {
+export default function Cart({setAmILoginOrSingup}) {
   const { cart, setCart } = useContext(CartContext);
   const [total, setTotal] = useState(0);
   const history = useHistory();
+
+  setAmILoginOrSingup(false);
+
   if (cart) {
     cart.forEach((item) => {
       setTotal(total + item.price * item.quantity);
