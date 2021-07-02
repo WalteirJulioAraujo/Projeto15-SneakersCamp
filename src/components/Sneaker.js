@@ -1,60 +1,65 @@
+import { useState } from "react";
 import styled from "styled-components";
+import BuyInfo from "./BuyInfo";
 
-export default function Sneaker({ item,i }){
+export default function Sneaker( { info } ){
+    const [ showBuyInfo, setShowBuyInfo ] = useState(false);
+
+    console.log(info)
+
+    function Buy(){
+        setShowBuyInfo(!showBuyInfo);
+    }
+
+    const priceFormat = ((info.price/100).toFixed(2)).replace('.',',');
     return(
-        <Item
-        onClick={() => console.log(item.id)}
-        condition={i}
-        image={item.image}
-        >
-            <p>{item.name}</p>
-            <p>R$ {(item.price / 100).toFixed(2).replace(".", ",")}</p>
-        </Item> 
-);
+        <>
+        <SneakerContainer  onClick={Buy} image={info.image} showBuyInfo={showBuyInfo}>
+            <div></div>
+            <span>{`${info.name}`}<br/>{`R$ ${priceFormat}`}</span>
+            {showBuyInfo
+            ?<BuyInfo info={info} />
+            :""
+            }
+        </SneakerContainer>
+        </>
+    );
 }
 
-
-const Item = styled.li`
-  width: 80%;
-  max-width: 300px;
-  min-width: 226px;
-  height: 300px;
-
-  margin-bottom: 40px;
-  padding: 10px;
-
-  border-radius: 5px;
-  border: none;
-
-  background-image: url(${(props) => props.image});
-  transform: ${(props) => (props.condition % 2 === 0 ? "rotatey(180deg)" : "")};
-  background-size: cover;
-  background-position: center;
-
-  p {
+const SneakerContainer = styled.div`
     display: flex;
-    transform: ${(props) =>
-      props.condition % 2 === 0 ? "rotatey(180deg)" : ""};
-    margin: 10px;
-    font-weight: normal;
-    font-size: 15px;
-    color: #000;
+    flex-direction: column;
+    justify-content: flex-star;
+    align-items: center;
 
-    justify-content: ${(props) =>
-      props.condition % 2 === 0 ? "" : "flex-end"};
-  }
+    width: 100%;
+    height: ${props=>props.showBuyInfo? '600px':'300px'};
+    margin-bottom: 30px;
+    background-color: #fff;
+    box-shadow: 5px 5px #ededed;
+    border: 1px solid #ededed;
+    border-radius: 5px;
 
-  p:first-child {
-    font-weight: bold;
-    font-size: 25px;
-  }
+    transition: 1s;
 
-  p:nth-child(2) {
-    font-size: 20px;
-  }
+    div{
+        width: 90%;
+        height: 250px;
+        margin: 0 auto;
+        background-image: url(${props=>props.image});
+        background-size: cover;
+        background-position: bottom;
+    }
 
-  @media (min-width: 640px) {
-    width: 50%;
-    height: 350px;
-  }
+    span{
+        font-size: 20px;
+        font-weight: 600;
+        font-style: italic;
+        margin-bottom: 10px;
+        margin-left: 10px;
+    }
+   
 `;
+
+const BuySection = styled.div`
+`
