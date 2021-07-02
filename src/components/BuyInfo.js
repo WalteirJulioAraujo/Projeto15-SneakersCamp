@@ -96,6 +96,9 @@ const Quantity = styled.div`
         justify-content: center;
         align-items: center;
         font-size: 20px;
+        :hover{
+            cursor: pointer;
+        }
     }
     p{
         font-size: 25px;
