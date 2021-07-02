@@ -15,7 +15,7 @@ export default function Sneaker( { info } ){
     return(
         <>
         <SneakerContainer  onClick={Buy} image={info.image} showBuyInfo={showBuyInfo}>
-            <div></div>
+            <div className="imageDiv" ></div>
             <span>{`${info.name}`}<br/>{`R$ ${priceFormat}`}</span>
             {showBuyInfo
             ?<BuyInfo info={info} />
@@ -29,7 +29,7 @@ export default function Sneaker( { info } ){
 const SneakerContainer = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: flex-star;
+    justify-content: flex-start;
     align-items: center;
 
     width: 100%;
@@ -42,9 +42,10 @@ const SneakerContainer = styled.div`
 
     transition: 1s;
 
-    div{
+    .imageDiv{
         width: 90%;
-        height: 250px;
+        max-width: 300px;
+        height: 300px;
         margin: 0 auto;
         background-image: url(${props=>props.image});
         background-size: cover;
@@ -58,7 +59,6 @@ const SneakerContainer = styled.div`
         margin-bottom: 10px;
         margin-left: 10px;
     }
-   
 `;
 
 const BuySection = styled.div`
