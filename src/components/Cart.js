@@ -10,6 +10,7 @@ export default function Cart({ setAmILoginOrSingup }) {
   const { cart, setCart } = useContext(CartContext);
   const [total, setTotal] = useState(0);
   const history = useHistory();
+  console.log(cart);
 
   setAmILoginOrSingup(false);
   useEffect(() => {
@@ -19,6 +20,11 @@ export default function Cart({ setAmILoginOrSingup }) {
       });
     }
   }, []);
+
+  function deleteItem(id) {
+    setCart(cart.filter((item) => (item.id === id ? false : true)));
+    console.log(cart);
+  }
 
   return (
     <Container cart={cart}>
@@ -33,22 +39,8 @@ export default function Cart({ setAmILoginOrSingup }) {
               <div className="text">
                 <p>{item.name}</p>
                 <p>Size: {item.size}</p>
-                <p>
-                  Qtd:
-                  <RemoveCircleSharp
-                    onClick={() => console.log("Remove" + item.id)}
-                    color={"#B40202"}
-                    height="18px"
-                    width="18px"
-                  />
-                  {item.quantity}
-                  <AddCircleSharp
-                    onClick={() => console.log("Add" + item.id)}
-                    color={"#30B402"}
-                    height="18px"
-                    width="18px"
-                  />
-                </p>
+                <p>Qtd: {item.quantity}</p>
+                <span onClick={() => deleteItem(item.id)}>Excluir</span>
               </div>
               <div className="price">
                 R$ {(item.price / 100).toFixed(2).replace(".", ",")}
@@ -128,7 +120,6 @@ const Container = styled.div`
   ul {
     margin: 0 auto;
     width: 100%;
-    /* max-width: 578px; */
     height: 50vh;
 
     padding-bottom: 15px;
@@ -141,7 +132,6 @@ const Container = styled.div`
   }
 
   > div {
-    /* max-width: 630px; */
     width: 100%;
     margin: 10px auto 0 auto;
     padding: 0 10px;
@@ -198,6 +188,10 @@ const CartItem = styled.li`
     svg {
       margin-left: 3px;
       margin-right: 3px;
+    }
+    span {
+      color: red;
+      font-size: 15px;
     }
   }
   .price {

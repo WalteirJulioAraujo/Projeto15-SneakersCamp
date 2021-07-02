@@ -33,16 +33,17 @@ export default function Payment() {
   function payment() {
     setLoading(true);
     const body = {
-      sneakers: cart,
+      sneakers: JSON.stringify(cart),
       userId: user.id,
-      shippingAndress: address,
+      shippingAndress: JSON.stringify(address),
       value: total + 1500,
     };
     const config = { headers: { Authorization: `Bearer ${user.token}` } };
     axios
-      .post("/payment", body, config)
+      .post("http://localhost:4000/payment", body, config)
       .then(() => {
         setPaid(true);
+        setCart();
         setTimeout(() => {
           history.push("/");
         }, 5000);
