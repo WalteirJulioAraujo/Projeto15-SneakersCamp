@@ -9,11 +9,10 @@ import CartIcon from "./CartIcon.js";
 import GlobalStyle from "../styles/GlobalStyles.js";
 import UserContext from "../contexts/UserContext.js";
 import CartContext from "../contexts/CartContext.js";
-import data from "./data";
 
 export default function App() {
   const [user, setUser] = useState(undefined);
-  const [cart, setCart] = useState(data); //name,quantity,price,image,size
+  const [cart, setCart] = useState(null); //name,quantity,price,image,size
   const [amILoginOrSingup, setAmILoginOrSingup] = useState(false);
 
   return (
@@ -36,6 +35,9 @@ export default function App() {
               <Route path="/cart" exact>
                 <Navbar />
                 <Cart />
+              </Route>
+              <Route path="/payment" exact>
+                <Navbar />
               </Route>
             </Switch>
           </BrowserRouter>

@@ -1,32 +1,55 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import CartContext from "../contexts/CartContext";
+import { AddCircleSharp, RemoveCircleSharp } from "react-ionicons";
 
 export default function Cart() {
-  const { cart } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
+  const [total, setTotal] = useState(0);
   const history = useHistory();
-  let total = 0;
-  cart.forEach((item) => {
-    total += item.price * item.quantity;
-  });
+  if (cart) {
+    cart.forEach((item) => {
+      setTotal(total + item.price * item.quantity);
+    });
+  }
+
   return (
     <Container>
-      <p>Carrinho:</p>
+      <p>Carrinho</p>
       <ul>
-        {cart.map((item) => (
-          <CartItem cart={item}>
-            <div className="image"></div>
-            <div className="text">
-              <p>{item.name}</p>
-              <p>Size: {item.size}</p>
-              <p>Qtd: {item.quantity}</p>
-            </div>
-            <div className="price">
-              R$ {(item.price / 100).toFixed(2).replace(".", ",")}
-            </div>
-          </CartItem>
-        ))}
+        {!cart ? (
+          <span>Não possui nenhum produto no carrinho</span>
+        ) : (
+          cart.map((item, i) => (
+            <CartItem key={i} cart={item}>
+              <div className="image"></div>
+              <div className="text">
+                <p>{item.name}</p>
+                <p>Size: {item.size}</p>
+                <p>
+                  Qtd:
+                  <RemoveCircleSharp
+                    onClick={() => console.log("Remove" + item.id)}
+                    color={"#B40202"}
+                    height="18px"
+                    width="18px"
+                  />
+                  {item.quantity}
+                  <AddCircleSharp
+                    onClick={() => console.log("Add" + item.id)}
+                    color={"#30B402"}
+                    height="18px"
+                    width="18px"
+                  />
+                </p>
+              </div>
+              <div className="price">
+                R$ {(item.price / 100).toFixed(2).replace(".", ",")}
+              </div>
+            </CartItem>
+          ))
+        )}
       </ul>
       <div>
         <p>Total:</p>
@@ -34,8 +57,8 @@ export default function Cart() {
       </div>
       <input
         type="button"
-        value="Continuar para entrega"
-        onClick={() => history.push("/shipping")}
+        value="Continuar para pagamento"
+        onClick={() => history.push("/payment")}
       />
       <input
         type="button"
@@ -47,6 +70,7 @@ export default function Cart() {
 }
 
 const Container = styled.div`
+  height: 100%;
   margin: 63px auto 0px;
 
   padding: 15px;
@@ -61,6 +85,7 @@ const Container = styled.div`
 
   input {
     width: 100%;
+    max-width: 630px;
     height: 45px;
 
     border-radius: 5px;
@@ -76,13 +101,20 @@ const Container = styled.div`
   }
 
   ul {
+    margin: 0 auto;
     width: 100%;
-    height: 350px;
-    overflow-y: hidden;
+    max-width: 578px;
+    height: 50vh;
+
+    padding-bottom: 15px;
+
+    overflow: auto;
   }
 
   > div {
+    max-width: 630px;
     margin: 10px 0;
+    padding: 0 10px;
   }
 
   div {
@@ -103,7 +135,6 @@ const CartItem = styled.li`
   margin: 0 auto;
 
   border-radius: 5px;
-  border: 1px solid #c6c6c6;
 
   box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
 
@@ -111,7 +142,6 @@ const CartItem = styled.li`
   justify-content: space-between;
 
   margin-top: 10px;
-  ${(props) => console.log(props.cart)}
 
   .image {
     width: 80px;
@@ -123,7 +153,6 @@ const CartItem = styled.li`
   .text {
     width: 50%;
     padding: 5px;
-    background-color: #ffc947;
 
     display: flex;
     flex-direction: column;
@@ -131,6 +160,14 @@ const CartItem = styled.li`
 
     p {
       font-size: 15px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    svg {
+      margin-left: 3px;
+      margin-right: 3px;
     }
   }
   .price {
@@ -139,6 +176,5 @@ const CartItem = styled.li`
 
     display: flex;
     align-items: flex-start;
-    justify-content: end;
   }
 `;
