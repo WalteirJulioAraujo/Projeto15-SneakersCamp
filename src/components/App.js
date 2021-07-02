@@ -24,7 +24,7 @@ export default function App() {
             <Switch>
               <Route path="/" exact>
                 <Navbar />
-                <Home />
+                <Home setAmILoginOrSingup={setAmILoginOrSingup} />
                 <CartIcon />
               </Route>
               <Route path="/login" exact>
@@ -35,7 +35,7 @@ export default function App() {
               </Route>
               <Route path="/cart" exact>
                 <Navbar />
-                <Cart />
+                <Cart setAmILoginOrSingup={setAmILoginOrSingup}/>
               </Route>
               <Route path="/payment" exact>
                 <Navbar />

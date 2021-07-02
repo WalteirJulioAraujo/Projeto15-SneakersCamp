@@ -4,10 +4,11 @@ import Loader from "react-loader-spinner";
 import styled from "styled-components";
 import Sneaker from './Sneaker';
 
-export default function Home() {
+export default function Home({setAmILoginOrSingup}) {
   const [sneakers, setSneakers] = useState(undefined);
   const [filter, setFilter] = useState([]); //adicionar os filtros aplicados nesta array
   const [loading, setLoading] = useState(false);
+  setAmILoginOrSingup(false);
   useEffect(() => {
     setLoading(true);
     let addFilter = "?";
