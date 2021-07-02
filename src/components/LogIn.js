@@ -30,7 +30,7 @@ export default function LogIn({ setAmILoginOrSingup }){
         request.then((e)=>{
             //Vai chegar do back { name, token }
             setUser(e.data);
-            history.push('/home');
+            history.push('/');
         })
         request.catch((e)=>{
             setDisabled(false);
