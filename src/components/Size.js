@@ -1,25 +1,23 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
-export default function Size({num,setSizeSelect,selected,id}){
+
+export default function Size({num,setSizeSelect,selected,availabeSizes}){
 
     const [ select, setSelect ] = useState(false);
-    const [ availabeSizes, setAvailabeSizes ] = useState([]);
-    useEffect(()=>{
-        const request = axios.get(`http://localhost:4000/stock${id}`);
-        request.then((e)=>setAvailabeSizes(e.data));
-        request.catch(()=>console.log('erro ao procurar os tamanhos disponiveis'))
-    },[])
+
+    const disabled = !availabeSizes.includes(num);
 
     function selectSize(e){
         e.stopPropagation();
+        if(disabled) return;
         setSelect(!select);
         setSizeSelect(num);
     }
 
+
     return(
-        <SizeButton onClick={selectSize} select={select} selected={selected} >{num}</SizeButton>
+        <SizeButton onClick={selectSize} select={select} selected={selected} disabled={disabled} >{num}</SizeButton>
     );
 }
 
@@ -31,6 +29,7 @@ const SizeButton = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: ${props=>props.disabled?'gray':''};
 
     :hover{
         cursor: pointer;
