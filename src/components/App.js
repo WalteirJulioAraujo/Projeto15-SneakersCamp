@@ -6,6 +6,7 @@ import SignUp from "./SignUp.js";
 import Cart from "./Cart.js";
 import Navbar from "./Navbar.js";
 import CartIcon from "./CartIcon.js";
+import Payment from "./Payment.js";
 import GlobalStyle from "../styles/GlobalStyles.js";
 import UserContext from "../contexts/UserContext.js";
 import CartContext from "../contexts/CartContext.js";
@@ -39,6 +40,7 @@ export default function App() {
               </Route>
               <Route path="/payment" exact>
                 <Navbar />
+                <Payment />
               </Route>
             </Switch>
           </BrowserRouter>
