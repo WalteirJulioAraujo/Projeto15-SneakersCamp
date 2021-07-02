@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import CartContext from "../contexts/CartContext";
 import { AddCircleSharp, RemoveCircleSharp } from "react-ionicons";
 
@@ -15,7 +15,7 @@ export default function Cart() {
   }
 
   return (
-    <Container>
+    <Container cart={cart}>
       <p>Carrinho</p>
       <ul>
         {!cart ? (
@@ -55,14 +55,21 @@ export default function Cart() {
         <p>Total:</p>
         <span>R$ {(total / 100).toFixed(2).replace(".", ",")}</span>
       </div>
+
+      {!cart ? (
+        ""
+      ) : (
+        <input
+          type="button"
+          value="Continuar para pagamento"
+          disabled={!cart}
+          onClick={() => history.push("/payment")}
+        />
+      )}
+
       <input
         type="button"
-        value="Continuar para pagamento"
-        onClick={() => history.push("/payment")}
-      />
-      <input
-        type="button"
-        value="Continuar comprando"
+        value={!cart ? "Escolha seu sneaker" : "Continuar comprando"}
         onClick={() => history.push("/")}
       />
     </Container>
@@ -107,6 +114,10 @@ const Container = styled.div`
     height: 50vh;
 
     padding-bottom: 15px;
+
+    display: ${(props) => (!props.cart ? "flex" : "block")};
+    justify-content: center;
+    align-items: center;
 
     overflow: auto;
   }
